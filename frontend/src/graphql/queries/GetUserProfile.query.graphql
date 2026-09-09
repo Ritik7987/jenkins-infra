@@ -1,0 +1,9 @@
+query GetUserProfile {
+  getUserProfile {
+    _id
+    createdAt
+    email
+    name
+    updatedAt
+  }
+}

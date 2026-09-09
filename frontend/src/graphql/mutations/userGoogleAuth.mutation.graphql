@@ -1,0 +1,3 @@
+mutation UserGoogleAuth($credential: String!) {
+  userGoogleAuth(credential: $credential)
+}

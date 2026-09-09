@@ -1,0 +1,42 @@
+query GetDocuments($pagination: PaginationInput) {
+  documents(pagination: $pagination) {
+    items {
+      _id
+      filename
+      fileUrl
+      pages
+      chunksCount
+      status
+      createdAt
+      updatedAt
+    }
+    totalCount
+    page
+    totalPages
+  }
+}
+
+mutation UploadDocument($file: Upload!) {
+  uploadDocument(file: $file)
+}
+
+mutation DeleteDocument($id: ID!) {
+  deleteDocument(id: $id)
+}
+
+mutation ReprocessDocument($id: ID!) {
+  reprocessDocument(id: $id)
+}
+
+subscription DocumentStatusUpdated {
+  documentStatusUpdated {
+    _id
+    filename
+    fileUrl
+    pages
+    chunksCount
+    status
+    createdAt
+    updatedAt
+  }
+}

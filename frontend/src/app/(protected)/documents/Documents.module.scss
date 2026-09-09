@@ -1,0 +1,138 @@
+.documentsContainer {
+  padding: var(--spacing-6) var(--spacing-8);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.title {
+  font-size: var(--h1-font-size);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.uploadBtn {
+  background-color: var(--primary-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-1);
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--body-font-size);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  transition: var(--transition-smooth);
+
+  &:hover {
+    background-color: var(--primary-accent-hover);
+  }
+}
+
+.statusBadge {
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: 999px;
+  font-size: var(--small-font-size);
+  font-weight: 500;
+  display: inline-block;
+
+  &.ready, &.completed {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+  }
+
+  &.processing {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+  }
+
+  &.failed {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+  }
+
+  &.pending {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-accent);
+  }
+}
+
+.actionBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  margin-right: var(--spacing-2);
+
+  &:hover {
+    background-color: #e5e7eb;
+    color: var(--error);
+  }
+  
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.uploadArea {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-2);
+  padding: var(--spacing-6);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+
+  &:hover {
+    border-color: var(--primary-accent);
+    background-color: var(--bg-secondary);
+  }
+  
+  &.hasFile {
+    border-style: solid;
+    border-color: var(--success);
+    background-color: rgba(16, 185, 129, 0.05);
+  }
+}
+
+.uploadIcon {
+  color: var(--text-secondary);
+}
+
+.uploadLabel {
+  font-size: var(--body-font-size);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.uploadSubtext {
+  font-size: var(--small-font-size);
+  color: var(--text-secondary);
+}
+
+.uploadError {
+  margin-top: var(--spacing-2);
+  color: var(--error);
+  font-size: var(--small-font-size);
+}

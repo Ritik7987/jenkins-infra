@@ -1,0 +1,14 @@
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.description {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.4;
+  margin-top: 0;
+  font-size: 14px;
+}

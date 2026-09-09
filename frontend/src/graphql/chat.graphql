@@ -1,0 +1,66 @@
+query GetChatSessions($pagination: PaginationInput!) {
+  chatSessions(paginationInput: $pagination) {
+    items {
+      _id
+      title
+      updatedAt
+    }
+    totalCount
+    page
+    totalPages
+  }
+}
+
+query GetChatSession($id: ID!) {
+  chatSession(id: $id) {
+    _id
+    title
+    documentIds
+    createdAt
+    updatedAt
+  }
+}
+
+query GetMessages($sessionId: ID!) {
+  messages(sessionId: $sessionId) {
+    _id
+    sessionId
+    role
+    content
+    createdAt
+  }
+}
+
+mutation CreateChat($input: CreateChatInput!) {
+  createChat(input: $input) {
+    _id
+    title
+  }
+}
+
+mutation DeleteChat($id: ID!) {
+  deleteChat(id: $id)
+}
+
+mutation UpdateChat($input: UpdateChatInput!) {
+  updateChat(input: $input) {
+    _id
+    title
+    documentIds
+  }
+}
+
+mutation AskQuestion($input: AskQuestionInput!) {
+  askQuestion(input: $input) {
+    answer
+    sources {
+      documentId
+      chunk
+      similarity
+    }
+  }
+}
+
+subscription AnswerStream($sessionId: String!) {
+  answerStream(sessionId: $sessionId)
+}

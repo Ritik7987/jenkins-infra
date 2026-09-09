@@ -1,0 +1,92 @@
+@use '@/styles/colors.scss' as *;
+
+.dashboardContainer {
+  padding: 32px;
+  background-color: var(--bg-primary);
+  min-height: 100%;
+}
+
+.dashboardHeader {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.statsGrid {
+  margin-bottom: 32px;
+}
+
+.statCard {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.statValue {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.sectionCard {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.statusBadge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+
+  &.ready {
+    background-color: rgba(16, 185, 129, 0.12);
+    color: var(--success);
+  }
+
+  &.processing {
+    background-color: rgba(245, 158, 11, 0.12);
+    color: var(--warning);
+  }
+
+  &.failed {
+    background-color: rgba(239, 68, 68, 0.12);
+    color: var(--error);
+  }
+}

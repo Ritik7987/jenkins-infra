@@ -1,0 +1,21 @@
+query GetDashboardData {
+  getDashboardData {
+    stats {
+      totalChats
+      activeDocuments
+      totalPages
+      totalQueries
+    }
+    recentActivities {
+      _id
+      title
+      updatedAt
+      messageCount
+    }
+    topDocuments {
+      _id
+      filename
+      chatCount
+    }
+  }
+}

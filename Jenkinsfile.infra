@@ -1,0 +1,17 @@
+@Library('jenkins-infra')
+
+multipleFolderBuild(
+
+    config: [
+        domainWith: "subdomain",
+    ],
+
+    apps: [
+        [
+            reactJs: [
+                path: "web",
+                node_version: "24"
+            ]
+        ]
+    ]
+)

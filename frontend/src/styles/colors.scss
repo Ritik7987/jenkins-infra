@@ -1,0 +1,44 @@
+:root {
+  /* Premium Light Mode Colors */
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #F1F5F9;
+  --surface: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --border: #E2E8F0;
+  
+  --primary-accent: #6366F1;
+  --primary-accent-hover: #4F46E5;
+  
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+
+  /* Premium Dark Mode Colors */
+  --dark-bg-primary: #0B0F19;
+  --dark-surface: #111827;
+  --dark-sidebar: #0F172A;
+  --dark-text: #F8FAFC;
+  --dark-secondary-text: #94A3B8;
+  --dark-border: #1E293B;
+  --dark-accent: #818CF8;
+}
+
+/* Mantine color variables overrides */
+:global([data-mantine-color-scheme='light']) {
+  --mantine-color-body: var(--bg-primary);
+  --mantine-color-text: var(--text-primary);
+  --mantine-color-dimmed: var(--text-secondary);
+  --mantine-color-default: var(--surface);
+  --mantine-color-default-hover: var(--bg-secondary);
+  --mantine-color-default-border: var(--border);
+}
+
+:global([data-mantine-color-scheme='dark']) {
+  --mantine-color-body: var(--dark-bg-primary);
+  --mantine-color-text: var(--dark-text);
+  --mantine-color-dimmed: var(--dark-secondary-text);
+  --mantine-color-default: var(--dark-surface);
+  --mantine-color-default-hover: var(--dark-sidebar);
+  --mantine-color-default-border: var(--dark-border);
+}

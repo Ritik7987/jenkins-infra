@@ -1,0 +1,39 @@
+.primaryBtn {
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 100%;
+}
+
+.primaryBtn:hover {
+  background: var(--accent-hover);
+}
+
+.socialBtn {
+  flex: 1;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s;
+  width: 100%;
+}
+
+.socialBtn:hover {
+  background: var(--surface-secondary);
+}

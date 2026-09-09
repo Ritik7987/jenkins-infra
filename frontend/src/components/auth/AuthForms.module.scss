@@ -1,0 +1,103 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.strengthMeter {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.strengthBar {
+  height: 4px;
+  flex: 1;
+  border-radius: 999px;
+  background: var(--border);
+  transition: 0.2s;
+}
+
+.fieldHint {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.forgot {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider span {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.socialRow {
+  display: flex;
+  gap: 12px;
+}
+
+.footerText {
+  text-align: center;
+  margin-top: 24px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.footerText button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.footerText button:hover {
+  text-decoration: underline;
+}
