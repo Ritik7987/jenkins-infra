@@ -1,0 +1,40 @@
+def call(Map args = [:]) {
+
+    def config = args.config ?: [:]
+    def apps   = args.apps ?: []
+
+    echo "========================================"
+    echo "Starting CI Pipeline"
+    echo "========================================"
+
+    echo "Domain: ${config.domainWith ?: 'not configured'}"
+    echo "API Path: ${config.apiPath ?: 'not configured'}"
+
+    echo "PR: ${env.CHANGE_ID ?: 'Not a PR'}"
+    echo "Source Branch: ${env.CHANGE_BRANCH ?: 'Not available'}"
+    echo "Target Branch: ${env.CHANGE_TARGET ?: 'Not available'}"
+
+    stage('CI') {
+
+        apps.each { app ->
+
+            if (app.nodeJs) {
+
+                nodeJs(
+                    config: app.nodeJs
+                )
+            }
+
+            if (app.reactJs) {
+
+                reactJs(
+                    config: app.reactJs
+                )
+            }
+        }
+    }
+
+    echo "========================================"
+    echo "CI Pipeline Completed"
+    echo "========================================"
+}
