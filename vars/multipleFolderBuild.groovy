@@ -3,38 +3,41 @@ def call(Map args = [:]) {
     def config = args.config ?: [:]
     def apps   = args.apps ?: []
 
-    echo "========================================"
-    echo "Starting CI Pipeline"
-    echo "========================================"
+    node {
 
-    echo "Domain: ${config.domainWith ?: 'not configured'}"
-    echo "API Path: ${config.apiPath ?: 'not configured'}"
+        echo "========================================"
+        echo "Starting CI Pipeline"
+        echo "========================================"
 
-    echo "PR: ${env.CHANGE_ID ?: 'Not a PR'}"
-    echo "Source Branch: ${env.CHANGE_BRANCH ?: 'Not available'}"
-    echo "Target Branch: ${env.CHANGE_TARGET ?: 'Not available'}"
+        echo "Domain: ${config.domainWith ?: 'not configured'}"
+        echo "API Path: ${config.apiPath ?: 'not configured'}"
 
-    stage('CI') {
+        echo "PR: ${env.CHANGE_ID ?: 'Not a PR'}"
+        echo "Source Branch: ${env.CHANGE_BRANCH ?: 'Not available'}"
+        echo "Target Branch: ${env.CHANGE_TARGET ?: 'Not available'}"
 
-        apps.each { app ->
+        stage('CI') {
 
-            if (app.nodeJs) {
+            apps.each { app ->
 
-                nodeJs(
-                    config: app.nodeJs
-                )
-            }
+                if (app.nodeJs) {
 
-            if (app.reactJs) {
+                    nodeJs(
+                        config: app.nodeJs
+                    )
+                }
 
-                reactJs(
-                    config: app.reactJs
-                )
+                if (app.reactJs) {
+
+                    reactJs(
+                        config: app.reactJs
+                    )
+                }
             }
         }
-    }
 
-    echo "========================================"
-    echo "CI Pipeline Completed"
-    echo "========================================"
+        echo "========================================"
+        echo "CI Pipeline Completed"
+        echo "========================================"
+    }
 }
