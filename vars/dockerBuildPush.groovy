@@ -3,16 +3,32 @@ def call(Map args = [:]) {
     def config = args.config ?: [:]
 
     def path = config.path ?: '.'
-    def imageName = config.image ?: 'app'
     def tag = config.tag ?: env.BUILD_NUMBER
 
+    def repositoryUrl = env.GIT_URL
+
+    if (!repositoryUrl) {
+        error "GIT_URL is not available"
+    }
+
+    def repositoryName = repositoryUrl
+        .tokenize('/')
+        .last()
+        .replaceAll(/\.git$/, '')
+
+    def applicationName = path == '.'
+        ? repositoryName
+        : path.tokenize('/').last()
+
+    def imageName = "${repositoryName}-${applicationName}"
     def fullImage = "ritikkumawat123/${imageName}:${tag}"
 
-    stage("Docker Build - ${path}") {
+    stage("Docker Build - ${applicationName}") {
 
         echo "========================================"
         echo "Docker Build"
         echo "========================================"
+        echo "Repository: ${repositoryName}"
         echo "Path: ${path}"
         echo "Image: ${fullImage}"
         echo "========================================"
@@ -27,10 +43,12 @@ def call(Map args = [:]) {
         }
     }
 
-    stage("Docker Push") {
+    stage("Docker Push - ${applicationName}") {
 
         echo "========================================"
         echo "Docker Push"
+        echo "========================================"
+        echo "Image: ${fullImage}"
         echo "========================================"
 
         withCredentials([
@@ -43,7 +61,7 @@ def call(Map args = [:]) {
 
             sh '''
                 echo "$DOCKER_PASSWORD" | docker login \
-                    -u "$DOCKER_USERNAME" \
+                    --username "$DOCKER_USERNAME" \
                     --password-stdin
             '''
 
