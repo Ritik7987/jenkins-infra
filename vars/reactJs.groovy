@@ -1,6 +1,5 @@
 def call(Map args = [:]) {
 
-```
 def config = args.config ?: [:]
 
 def path = config.path ?: '.'
@@ -39,6 +38,5 @@ stage("React - ${path}") {
         }
     }
 }
-```
 
 }
