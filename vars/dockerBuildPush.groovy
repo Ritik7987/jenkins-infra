@@ -3,7 +3,7 @@ def call(Map args = [:]) {
     def config = args.config ?: [:]
 
     def path = config.path ?: '.'
-    def tag = config.tag ?: env.BUILD_NUMBER
+    def tag = config.tag ?: (env.GIT_COMMIT ?: env.BUILD_NUMBER)
 
     def repositoryName = env.JOB_NAME.tokenize('/')[1]
 
