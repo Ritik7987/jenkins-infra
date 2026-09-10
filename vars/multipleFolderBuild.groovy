@@ -43,6 +43,12 @@ def call(Map args = [:]) {
                         config: app.reactJs
                     )
                 }
+
+                if (app.nextJs) {
+                    nextJs(
+                        config: app.nextJs
+                    )
+                }
             }
         }
 
@@ -59,6 +65,12 @@ def call(Map args = [:]) {
                 if (app.reactJs) {
                     dockerBuildPush(
                         config: app.reactJs
+                    )
+                }
+
+                if (app.nextJs) {
+                    dockerBuildPush(
+                        config: app.nextJs
                     )
                 }
             }

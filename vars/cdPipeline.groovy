@@ -28,8 +28,8 @@ def call(Map args = [:]) {
 
             apps.each { app ->
 
-                // Ensure we pass the appropriate config map (reactJs or nodeJs)
-                def appConfig = app.nodeJs ?: app.reactJs
+                // Ensure we pass the appropriate config map
+                def appConfig = app.nodeJs ?: app.reactJs ?: app.nextJs
                 if (appConfig) {
                     deployHelmCanary(
                         config: appConfig
