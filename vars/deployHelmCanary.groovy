@@ -47,7 +47,7 @@ def call(Map args = [:]) {
 
         // Using kubeconfig credentials (to be created manually as 'kubeconfig-k8s')
         withCredentials([file(credentialsId: 'kubeconfig-k8s', variable: 'KUBECONFIG')]) {
-            withDockerContainer(image: 'dtzar/helm-kubectl:3.16.0') {
+            withDockerContainer(image: 'dtzar/helm-kubectl:3.16.0', args: '--network kind') {
                 sh """
                     helm upgrade --install ${releaseName} ${helmChartPath} \
                         --namespace ${namespace} \
