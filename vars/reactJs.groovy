@@ -27,7 +27,7 @@ stage("React - ${path}") {
             echo "Installing dependencies..."
 
             sh '''
-                npm ci
+                npm install
             '''
 
             echo "Building React application..."

@@ -29,7 +29,7 @@ stage("Node.js - ${path}") {
             echo "Installing dependencies..."
 
             sh '''
-                npm ci
+                npm install
             '''
 
             if (unitTest) {
