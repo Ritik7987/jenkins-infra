@@ -47,12 +47,14 @@ def call(Map args = [:]) {
 
         // Using kubeconfig credentials (to be created manually as 'kubeconfig-k8s')
         withCredentials([file(credentialsId: 'kubeconfig-k8s', variable: 'KUBECONFIG')]) {
-            sh """
-                helm upgrade --install ${releaseName} ${helmChartPath} \
-                    --namespace ${namespace} \
-                    --set image.repository=${imageRepository} \
-                    --set image.tag=${tag}
-            """
+            withDockerContainer(image: 'dtzar/helm-kubectl:3.16.0') {
+                sh """
+                    helm upgrade --install ${releaseName} ${helmChartPath} \
+                        --namespace ${namespace} \
+                        --set image.repository=${imageRepository} \
+                        --set image.tag=${tag}
+                """
+            }
         }
     }
 }
