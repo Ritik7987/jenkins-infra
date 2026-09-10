@@ -1,7 +1,7 @@
 def call(Map args = [:]) {
 
     def config = args.config ?: [:]
-    def apps   = args.apps ?: []
+    def apps = args.apps ?: []
 
     node {
 
@@ -22,7 +22,6 @@ def call(Map args = [:]) {
 
             checkout scm
 
-            echo "Workspace contents:"
             sh '''
                 pwd
                 ls -la
@@ -34,15 +33,31 @@ def call(Map args = [:]) {
             apps.each { app ->
 
                 if (app.nodeJs) {
-
                     nodeJs(
                         config: app.nodeJs
                     )
                 }
 
                 if (app.reactJs) {
-
                     reactJs(
+                        config: app.reactJs
+                    )
+                }
+            }
+        }
+
+        stage('Docker') {
+
+            apps.each { app ->
+
+                if (app.nodeJs) {
+                    dockerBuildPush(
+                        config: app.nodeJs
+                    )
+                }
+
+                if (app.reactJs) {
+                    dockerBuildPush(
                         config: app.reactJs
                     )
                 }
