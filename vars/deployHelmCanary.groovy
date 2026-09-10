@@ -51,6 +51,7 @@ def call(Map args = [:]) {
                 sh """
                     helm upgrade --install ${releaseName} ${helmChartPath} \
                         --namespace ${namespace} \
+                        --create-namespace \
                         --set image.repository=${imageRepository} \
                         --set image.tag=${tag}
                 """
