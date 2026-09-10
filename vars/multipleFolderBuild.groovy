@@ -16,6 +16,19 @@ def call(Map args = [:]) {
         echo "Source Branch: ${env.CHANGE_BRANCH ?: 'Not available'}"
         echo "Target Branch: ${env.CHANGE_TARGET ?: 'Not available'}"
 
+        stage('Checkout') {
+
+            echo "Checking out application source code..."
+
+            checkout scm
+
+            echo "Workspace contents:"
+            sh '''
+                pwd
+                ls -la
+            '''
+        }
+
         stage('CI') {
 
             apps.each { app ->
