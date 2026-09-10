@@ -5,16 +5,11 @@ def call(Map args = [:]) {
     def path = config.path ?: '.'
     def tag = config.tag ?: env.BUILD_NUMBER
 
-    def repositoryUrl = env.GIT_URL
+    def repositoryName = env.JOB_NAME.tokenize('/')[1]
 
-    if (!repositoryUrl) {
-        error "GIT_URL is not available"
+    if (!repositoryName) {
+        error "Unable to determine repository name from JOB_NAME"
     }
-
-    def repositoryName = repositoryUrl
-        .tokenize('/')
-        .last()
-        .replaceAll(/\.git$/, '')
 
     def applicationName = path == '.'
         ? repositoryName
