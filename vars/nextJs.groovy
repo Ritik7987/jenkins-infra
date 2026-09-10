@@ -4,7 +4,6 @@ def call(Map args = [:]) {
 
     def path = config.path ?: '.'
     def nodeVersion = config.node_version ?: '24'
-    def nodeOptions = config.node_options ?: '--max-old-space-size=4096'
 
     stage("Next.js - ${path}") {
 
@@ -29,9 +28,6 @@ def call(Map args = [:]) {
 
                     echo "NPM version:"
                     sh 'npm --version'
-
-                    echo "Node memory configuration:"
-                    sh 'node -e "console.log(require(\'v8\').getHeapStatistics().heap_size_limit / 1024 / 1024 + \' MB\')"'
 
                     echo "Installing dependencies..."
 
