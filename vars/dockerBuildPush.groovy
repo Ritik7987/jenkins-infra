@@ -3,9 +3,17 @@ def call(Map args = [:]) {
     def config = args.config ?: [:]
 
     def path = config.path ?: '.'
-    def tag = config.tag ?: (env.GIT_COMMIT ?: env.BUILD_NUMBER)
+    def tag = config.tag
+    if (!tag) {
+        try {
+            tag = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+        } catch (Exception e) {
+            tag = env.BUILD_NUMBER
+        }
+    }
 
-    def repositoryName = env.JOB_NAME.tokenize('/')[1]
+    def jobTokens = env.JOB_NAME.tokenize('/')
+    def repositoryName = (jobTokens.size() > 1 ? jobTokens[-2] : jobTokens[0]).toLowerCase()
 
     if (!repositoryName) {
         error "Unable to determine repository name from JOB_NAME"
