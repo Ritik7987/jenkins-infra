@@ -1,42 +1,51 @@
 def call(Map args = [:]) {
 
-def config = args.config ?: [:]
+    def config = args.config ?: [:]
 
-def path = config.path ?: '.'
-def nodeVersion = config.node_version ?: '24'
+    def path = config.path ?: '.'
+    def nodeVersion = config.node_version ?: '24'
+    def nodeOptions = config.node_options ?: '--max-old-space-size=4096'
 
-stage("React - ${path}") {
+    stage("React - ${path}") {
 
-    echo "========================================"
-    echo "React Application"
-    echo "========================================"
-    echo "Path: ${path}"
-    echo "Node version: ${nodeVersion}"
-    echo "========================================"
+        echo "========================================"
+        echo "React Application"
+        echo "========================================"
+        echo "Path: ${path}"
+        echo "Node version: ${nodeVersion}"
+        echo "Node options: ${nodeOptions}"
+        echo "========================================"
 
-    dir(path) {
+        dir(path) {
 
-        docker.image("node:${nodeVersion}-slim").inside {
+            docker.image("node:${nodeVersion}-slim").inside {
 
-            echo "Node version:"
-            sh 'node --version'
+                withEnv([
+                    "NODE_OPTIONS=${nodeOptions}"
+                ]) {
 
-            echo "NPM version:"
-            sh 'npm --version'
+                    echo "Node version:"
+                    sh 'node --version'
 
-            echo "Installing dependencies..."
+                    echo "NPM version:"
+                    sh 'npm --version'
 
-            sh '''
-                npm install
-            '''
+                    echo "Node memory configuration:"
+                    sh 'node -e "console.log(require(\'v8\').getHeapStatistics().heap_size_limit / 1024 / 1024 + \' MB\')"'
 
-            echo "Building React application..."
+                    echo "Installing dependencies..."
 
-            sh '''
-                npm run build
-            '''
+                    sh '''
+                        npm install
+                    '''
+
+                    echo "Building React application..."
+
+                    sh '''
+                        npm run build
+                    '''
+                }
+            }
         }
     }
-}
-
 }
