@@ -13,7 +13,8 @@ def call(Map args = [:]) {
     }
 
     def jobTokens = env.JOB_NAME.tokenize('/')
-    def repositoryName = (jobTokens.size() > 1 ? jobTokens[-2] : jobTokens[0]).toLowerCase()
+    def rawRepoName = jobTokens.size() > 1 ? jobTokens[-2] : jobTokens[0]
+    def repositoryName = rawRepoName.toLowerCase().replaceAll(/[^a-z0-9-_]/, '-')
 
     if (!repositoryName) {
         error "Unable to determine repository name from JOB_NAME"
