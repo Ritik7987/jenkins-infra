@@ -12,16 +12,13 @@ def call(Map args = [:]) {
         echo "========================================"
         echo "Path: ${path}"
         echo "Node version: ${nodeVersion}"
-        echo "Node options: ${nodeOptions}"
         echo "========================================"
 
         dir(path) {
 
             docker.image("node:${nodeVersion}-slim").inside {
 
-                withEnv([
-                    "NODE_OPTIONS=${nodeOptions}"
-                ]) {
+                withEnv([]) {
 
                     echo "Node version:"
                     sh 'node --version'
