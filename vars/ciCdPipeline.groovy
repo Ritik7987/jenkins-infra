@@ -3,10 +3,10 @@ def call(Map args = [:]) {
     def config = args.config ?: [:]
     def apps = args.apps ?: []
 
-    // DEBUG: Let's see what environment variables Jenkins actually has!
-    sh 'printenv | sort'
+    def causesString = currentBuild?.buildCauses?.toString() ?: ""
 
     def deployComment = 
+        (env.CHANGE_ID && causesString.contains('"commentBody":"DEPLOY"')) ||
         (env.GITHUB_COMMENT?.trim() == 'DEPLOY') ||
         (env.ghprbCommentBody?.trim() == 'DEPLOY') ||
         (env.GITHUB_PR_COMMENT_BODY?.trim() == 'DEPLOY')
